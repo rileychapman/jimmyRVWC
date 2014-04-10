@@ -327,7 +327,7 @@ class Robotis_Servo():
             returns [n1,n2 ...] (list of parameters)
         '''
         msg = [ 0x02, address, nBytes ]
-        print msg
+        #print msg      #removed by Riley
         return self.send_instruction( msg, self.servo_id )
 
     def write_address(self, address, data):
