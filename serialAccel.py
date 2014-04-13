@@ -19,6 +19,7 @@ def filter(line):
 	
 if __name__ == '__main__':
 	ser = serial.Serial('/dev/tty.usbmodem1411', 9600)
+	#ser = serial.Serial('/dev/ttyACM0',9600)
 	while True:
 		lines = []
 		for i in range(0,2):
