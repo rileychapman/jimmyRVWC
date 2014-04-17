@@ -1,5 +1,6 @@
 from lib_robotis import *
 
+
 def to_angle(angle):
 	"""
 	Move to angle (radians)
