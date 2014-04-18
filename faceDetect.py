@@ -1,14 +1,25 @@
 import cv
 
 HAAR_CASCADE_PATH = "/opt/local/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml"
+HAAR_CASCADE_PATH = "/usr/local/Cellar/opencv/2.4.8.2/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml"
 CAMERA_INDEX = 0
+
+class Face:
+    def __init__(self,x,y,w,h):
+        self.x = x
+        self.y = y
+        self.w = w
+        self.h = h
+
+
 
 def detect_faces(image):
     faces = []
     detected = cv.HaarDetectObjects(image, cascade, storage, 1.2, 2, cv.CV_HAAR_DO_CANNY_PRUNING, (100,100))
     if detected:
         for (x,y,w,h),n in detected:
-            faces.append((x,y,w,h))
+            face = Face(x,y,w,h)
+            faces.append(face)
     return faces
 
 if __name__ == "__main__":
@@ -23,12 +34,19 @@ if __name__ == "__main__":
     while True:
         image = cv.QueryFrame(capture)
 
+
         # Only run the Detection algorithm every 5 frames to improve performance
         if i%5==0:
             faces = detect_faces(image)
 
-        for (x,y,w,h) in faces:
-            cv.Rectangle(image, (x,y), (x+w,y+h), 255)
+        faces.sort(key=lambda face: face.y)
+
+        for face in faces:
+            cv.Rectangle(image, (face.x,face.y), (face.x+face.w,face.y+face.h), 255)
+        if len(faces) != 0:
+            face = faces[0]        
+            print "top face at:" + str(face.x) + ", "+ str(face.y)
 
         cv.ShowImage("w1", image)
+
         i += 1
