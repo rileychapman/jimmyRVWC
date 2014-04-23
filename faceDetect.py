@@ -1,7 +1,8 @@
 import cv
 
-HAAR_CASCADE_PATH = "/opt/local/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml"
-HAAR_CASCADE_PATH = "/usr/local/Cellar/opencv/2.4.8.2/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml"
+#HAAR_CASCADE_PATH = "/opt/local/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml"
+#HAAR_CASCADE_PATH = "/usr/local/Cellar/opencv/2.4.8.2/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml"
+HAAR_CASCADE_PATH = "/opt/ros/hydro/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml"
 CAMERA_INDEX = 0
 
 class Face:
@@ -23,7 +24,7 @@ def detect_faces(image):
     return faces
 
 if __name__ == "__main__":
-    cv.NamedWindow("Video", cv.CV_WINDOW_AUTOSIZE)
+    #cv.NamedWindow("Video", cv.CV_WINDOW_AUTOSIZE)
 
     capture = cv.CaptureFromCAM(CAMERA_INDEX)
     storage = cv.CreateMemStorage()
@@ -35,8 +36,8 @@ if __name__ == "__main__":
         image = cv.QueryFrame(capture)
 
 
-        # Only run the Detection algorithm every 5 frames to improve performance
-        if i%5==0:
+        # Only run the Detection algorithm every 5 frames to improve performance - changed to 1
+        if i%1==0:
             faces = detect_faces(image)
 
         faces.sort(key=lambda face: face.y)
