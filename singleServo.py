@@ -6,7 +6,7 @@ def to_angle(angle):
 	Move to angle (radians)
 	"""
 
-	dyn = USB2Dynamixel_Device('/dev/tty.usbserial-AH01FOVT') #setup usb controller
+	dyn = USB2Dynamixel_Device('/dev/tty.usbserial-AH01FP0W') #setup usb controller
 	servo = Robotis_Servo(dyn, 1, series = 'MX') #setup servo object
 	servo.move_angle(angle, angvel = 1.7 , blocking = False)       #(servo id, desired angle, speed, blocking)
 

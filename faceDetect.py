@@ -23,7 +23,7 @@ def detect_faces(image):
     return faces
 
 if __name__ == "__main__":
-    cv.NamedWindow("Video", cv.CV_WINDOW_AUTOSIZE)
+    #cv.NamedWindow("Video", cv.CV_WINDOW_AUTOSIZE)
 
     capture = cv.CaptureFromCAM(CAMERA_INDEX)
     storage = cv.CreateMemStorage()
