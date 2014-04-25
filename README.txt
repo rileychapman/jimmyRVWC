@@ -5,3 +5,6 @@ python lib_robotis.py -d /dev/ttyUSB0 --scan
 
 On a mac, Doc's USB2Dynamixel could be scanned using 
 python lib_robotis.py -d /dev/tty.usbserial-AH01FOVT  --scan
+
+On a mac, Jimmy's USB2Dynamixel could be scanned using
+python lib_robotis.py -d /dev/tty.usbserial-AH01FP0W  --scan
