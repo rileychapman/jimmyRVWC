@@ -3,7 +3,7 @@ import cv
 #HAAR_CASCADE_PATH = "/opt/local/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml"
 #HAAR_CASCADE_PATH = "/usr/local/Cellar/opencv/2.4.8.2/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml"
 HAAR_CASCADE_PATH = "/opt/ros/hydro/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml"
-CAMERA_INDEX = 0
+CAMERA_INDEX = 1
 
 class Face:
     def __init__(self,x,y,w,h):
