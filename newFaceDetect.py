@@ -12,6 +12,8 @@ import time
 import Image
 
 HAAR_CASCADE_PATH = "/usr/local/Cellar/opencv/2.4.8.2/share/OpenCV/"
+HAAR_CASCADE_PATH = "/opt/ros/hydro/share/OpenCV/"
+
  
 class Face:
     def __init__(self,x,y,w,h):
@@ -78,4 +80,4 @@ if __name__ == "__main__":
         image = DetectFace(img, faceCascade)
         cv.ShowImage("face detection test", image)
      
-    cv.ReleaseCapture(capture)
+    #cv.ReleaseCapture(capture)
