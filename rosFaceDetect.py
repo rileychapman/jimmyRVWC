@@ -10,6 +10,9 @@
 import cv
 import time
 import Image
+import roslib; roslib.load_manifest('jimmy')
+import rospy
+from std_msgs.msg import String
 
 #HAAR_CASCADE_PATH = "/usr/local/Cellar/opencv/2.4.8.2/share/OpenCV/"
 HAAR_CASCADE_PATH = "/opt/ros/hydro/share/OpenCV/"
@@ -69,9 +72,9 @@ def DetectFace(image, faceCascade):
             cv.Rectangle(image, pt1, pt2, cv.RGB(0, 100, 255), 5, 8, 0)
  
     return [image,faceObjects]
- 
-if __name__ == "__main__":
- 
+
+def publisher():
+    rospy.init_node("face_location",anonymous = True)
     capture = cv.CaptureFromCAM(1)
     #capture = cv.CaptureFromFile("test.avi")
      
@@ -79,19 +82,23 @@ if __name__ == "__main__":
     #faceCascade = cv.Load("haarcascades/haarcascade_frontalface_alt2.xml")
     faceCascade = cv.Load(HAAR_CASCADE_PATH + "haarcascades/haarcascade_frontalface_alt.xml")
     #faceCascade = cv.Load("haarcascades/haarcascade_frontalface_alt_tree.xml")
-     
-    while (cv.WaitKey(15)==-1):
-        img = cv.QueryFrame(capture)
-        if not img:
-            print "No camera"
-        [image,faces] = DetectFace(img, faceCascade)
-        faces.sort(key=lambda face: face.y)
-        if len(faces) != 0:
-            face = faces[0]        
-            print "top face at:" + str(face.midx) + ", "+ str(face.midy)
-        cv.ShowImage("face detection test", image)
-     
-    #cv.ReleaseCapture(capture)
+    pub = rospy.Publisher('face_location', String)
+    while not rospy.is_shutdown():
+        while (cv.WaitKey(15)==-1):
+            img = cv.QueryFrame(capture)
+            if not img:
+                print "No camera"
+            [image,faces] = DetectFace(img, faceCascade)
+            faces.sort(key=lambda face: face.y)
+            if len(faces) != 0:
+                face = faces[0]        
+                print "top face at:" + str(face.midx) + ", "+ str(face.midy)
+                pup.publish(str(face.midx)+','+str(face.midy))
+            cv.ShowImage("face detection test", image)
+ 
+if __name__ == "__main__":
+ 
+    publisher()
 
 
     #From Doc's Right Eye
